@@ -1,7 +1,7 @@
 import streamlit as st
 import yt_dlp
 import whisper
-from moviepy.editor import VideoFileClip, TextClip, CompositeVideoClip
+from moviepy.video.io.VideoFileClip import VideoFileClip
 from moviepy.config import change_settings
 import os
 import tempfile
@@ -153,4 +153,5 @@ if st.button("⚡ Crear Clip Viral"):
         
         finally:
             # Limpieza (opcional, el sistema operativo limpia tempfiles eventualmente)
+
             pass
