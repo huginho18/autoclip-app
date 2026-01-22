@@ -22,7 +22,16 @@ def download_video(url, output_path):
         'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
         'outtmpl': output_path,
         'overwrites': True,
+
+        # 🔑 CLAVES ANTI 403
+        'quiet': True,
+        'nocheckcertificate': True,
+        'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'http_headers': {
+            'Referer': 'https://www.youtube.com/',
+        },
     }
+
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
 
@@ -30,7 +39,7 @@ def download_video(url, output_path):
 def load_whisper_model():
     # Usamos 'base' para equilibrio entre velocidad y precisión. 
     # Usa 'tiny' si el servidor es muy lento.
-    return whisper.load_model("base")
+    return whisper.load_model("tiny")
 
 def generate_subtitles(text, start, end, video_w):
     # Genera el clip de texto
@@ -155,3 +164,4 @@ if st.button("⚡ Crear Clip Viral"):
             # Limpieza (opcional, el sistema operativo limpia tempfiles eventualmente)
 
             pass
+
